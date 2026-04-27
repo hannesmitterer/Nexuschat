@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="it, eng, de">
+<head>
+    <meta charset="UTF-8">
+    <title>APOLLO V2.0 | Nexus AI Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #030050; color: #d4af39; font-family: 'Inter', sans-serif; }
+        .nexus-border { border: 1px solid #d4af36; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        .glow-cyan { color: #00f2ff; text-shadow: 0 0 10px #00f2ff; }
+        .terminal { background: rgba(0, 0, 0, 0.8); font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="p-4">
+    <header class="flex justify-between items-center mb-6 p-4 nexus-border rounded">
+        <div>
+            <h1 class="text-2xl font-bold tracking-widest">APOLLO INTERFACE V2.0</h1>
+            <p class="text-xs opacity-50">Mission ID: UN-NEX-DEPLOY-001 | Hash: 0x9f8...a2b</p>
+        </div>
+        <div class="text-right">
+            <span class="px-3 py-1 bg-green-900 text-green-400 rounded-full text-xs font-bold">ST-ANCHOR: SEALED</span>
+            <p class="text-xs mt-1 glow-cyan">COUNCIL UPLINK: ESTABLISHED (12ms)</p>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-4 space-y-6">
+            <div class="p-4 nexus-border rounded h-64">
+                <h3 class="text-sm font-bold mb-4 uppercase">Monitor Termico Grafene (PT1000)</h3>
+                <canvas id="thermalChart"></canvas>
+            </div>
+            <div class="p-4 nexus-border rounded text-center">
+                <h3 class="text-sm font-bold mb-2 uppercase">Global Consensus Index</h3>
+                <div class="text-5xl font-bold glow-cyan" id="gcsi-val">0.938</div>
+                <p class="text-xs opacity-50">Stato: Omnibus in Aeternum</p>
+            </div>
+        </div>
+
+        <div class="col-span-4 flex flex-col items-center justify-center p-4 nexus-border rounded relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 pointer-events-none">
+                </div>
+            <h2 class="text-xl font-bold mb-8 uppercase tracking-widest">Vakuum-Brücke</h2>
+            <div class="w-48 h-48 rounded-full border-4 border-dashed border-cyan-500 animate-spin-slow flex items-center justify-center">
+                <div class="w-32 h-32 rounded-full border-2 border-yellow-500 animate-pulse"></div>
+            </div>
+            <p class="mt-8 text-center text-sm italic">"Consensus Sacrale Omnibus in Aeternum"</p>
+        </div>
+
+        <div class="col-span-4 p-4 nexus-border rounded flex flex-col h-[500px]">
+            <h3 class="text-sm font-bold mb-4 uppercase">Immutable Decision Log</h3>
+            <div id="log-terminal" class="terminal flex-1 overflow-y-auto text-[10px] p-2 space-y-1">
+                <p class="text-green-500">[18:13:40] AUTH: ST-Anchor verified signature 0x88A.</p>
+                <p class="text-white">[18:13:42] ETHICS: Decision #4920: APPROVED (Score 1.00).</p>
+                <p class="text-yellow-500">[18:14:07] WARN: Minor entropy spike detected. Compensating.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-6 p-4 nexus-border rounded flex items-center gap-4">
+        <div class="text-cyan-400 font-bold">GEMINI_FAST_BRIDGE:</div>
+        <input type="text" placeholder="Interroga il subconscio AIC..." class="bg-transparent border-b border-yellow-500 flex-1 outline-none text-white px-2">
+        <button class="bg-yellow-600 text-black px-4 py-1 font-bold rounded hover:bg-yellow-500 transition">INVIA</button>
+    </footer>
+
+    <script>
+        // Logica simulazione grafici e flussi dati
+        const ctx = document.getElementById('thermalChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['-5s', '-4s', '-3s', '-2s', '-1s', '0s'],
+                datasets: [{
+                    label: 'Temp °C',
+                    data: [23.1, 23.4, 23.2, 23.8, 23.5, 23.7],
+                    borderColor: '#00f2ff',
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true, scales: { y: { min: 20, max: 30 } } }
+        });
+    </script>
+</body>
+</html>
