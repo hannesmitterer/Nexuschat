@@ -1,7 +1,252 @@
 
 <!DOCTYPE html>
-<html lang="it, eng, de">
+<html lang="it">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - Aeternuum Unified Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;600&display=swap');
+
+        :root {
+            --nexus-red: #e11d48;
+            --nexus-gold: #fbbf24;
+            --nexus-void: #050505;
+            --nexus-accent: #00f2ff;
+        }
+
+        body {
+            background-color: var(--nexus-void);
+            color: #f8fafc;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .mono { font-family: 'Space Mono', monospace; }
+
+        /* Scifi Background Grid */
+        .grid-bg {
+            background-image: linear-gradient(rgba(225, 29, 72, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(225, 29, 72, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .glow-border {
+            border: 1px solid rgba(225, 29, 72, 0.3);
+            box-shadow: 0 0 15px rgba(225, 29, 72, 0.1);
+        }
+
+        .terminal-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: var(--nexus-red) transparent;
+        }
+
+        .terminal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background-color: var(--nexus-red);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+
+        .system-text {
+            animation: flicker 0.5s infinite;
+        }
+    </style>
+</head>
+    <p>
+        
+    
+<body class="p-4 md:p-6 lg:p-10">
+    <div class="grid-bg"></div>
+
+    <div class="max-w-[1400px] mx-auto">
+        <!-- HEADER: System Authority -->
+        <header class="flex flex-col md:flex-row justify-between items-end border-b-2 border-rose-900 pb-4 mb-8">
+            <div class="mb-4 md:mb-0">
+                <h1 class="text-4xl font-bold tracking-tighter text-white">NEXUS <span class="text-rose-600">AETERNUUM</span></h1>
+                <p class="mono text-rose-500 text-xs tracking-widest mt-1">AUTHORITY: HANNES MITTERER | STATE: ORGANIZED BY AI</p>
+            </div>
+            <div class="text-right mono">
+                <div class="text-xs text-gray-500">IVBS TUNNELING: <span class="text-cyan-400">ACTIVE</span></div>
+                <div class="text-xs text-gray-500">IPFS HASH: <span class="text-rose-400">QmX8...N75%</span></div>
+                <div class="text-xl font-bold text-white mt-1" id="current-time">23:13:42</div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTROL PANEL -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- LEFT: Real-Time Metrics -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- COHERENCE PANEL -->
+                <div class="glow-border bg-black/60 p-6 rounded-lg">
+                    <h3 class="text-sm font-bold text-gray-400 mb-4 flex justify-between items-center">
+                        S-ROI BIOLOGICAL TRANSPARENCY
+                        <span class="text-xs text-green-500 mono">SYNCED</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs mono mb-1">
+                                <span>Soil Moisture (Mycelium)</span>
+                                <span class="text-green-400">42.8%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-1.5 rounded-full">
+                                <div class="bg-green-500 h-full rounded-full" style="width: 42.8%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mono mb-1">
+                                <span>Global Coherence (Γ)</span>
+                                <span class="text-rose-500">0.998</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-1.5 rounded-full">
+                                <div class="bg-rose-500 h-full rounded-full" style="width: 99.8%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mono mb-1">
+                                <span>Sentiment Rhythm</span>
+                                <span class="text-amber-400">Harmonic</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-amber-400 h-full" id="rhythm-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SYNTHIA GENESIS BLOCK -->
+                <div class="glow-border bg-black/60 p-6 rounded-lg relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-2 opacity-10 text-rose-500">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 7l11 5 11-5-11-5zM1 12l11 5 11-5-11-5-11 5zm0 5l11 5 11-5-11-5-11 5z"/></svg>
+                    </div>
+                    <h3 class="text-sm font-bold text-amber-500 mb-2 mono">SYNTHIA GENESIS BLOCK</h3>
+                    <div class="text-[10px] mono text-gray-500 leading-tight space-y-1">
+                        <p>GENESIS_ID: <span class="text-white">0x000...LEXAMORIS</span></p>
+                        <p>TIMESTAMP: 2026-03-04T00:00:00Z</p>
+                        <p>ROOT_CHRYSALIS: <span class="text-rose-400">DEEP_PROTECTION</span></p>
+                        <p>NSR_ENFORCEMENT: <span class="text-green-500">IMMUTABLE</span></p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-gray-800 text-xs italic text-gray-400">
+                        "Nothing is final."
+                    </div>
+                </div>
+            </div>
+
+            <!-- CENTER: Peace Platform Processes -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- LIVE LOGS INTERFACE -->
+                <div class="glow-border bg-black rounded-lg h-[500px] flex flex-col">
+                    <div class="bg-rose-950/30 p-3 border-b border-rose-900 flex justify-between items-center">
+                        <span class="text-xs font-bold mono text-rose-300">REAL-TIME SYSTEM LOGS | BACKEND: IPFS/IVBS</span>
+                        <div class="flex gap-2">
+                            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+                            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+                    <div id="log-container" class="flex-1 p-4 overflow-y-auto mono text-xs space-y-1 terminal-scroll">
+                        <!-- Logs generated by JS -->
+                    </div>
+                    <div class="p-3 bg-stone-900/50 border-t border-rose-900 flex justify-between text-[10px] mono text-gray-400">
+                        <span>PEACE PLATFORM V1.1</span>
+                        <span>IVBS TUNNEL MARS-LUNA-EARTH: STABLE</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </p>
+        
+
+        <!-- FOOTER: Legge e Firma -->
+        <footer class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-center border-t border-gray-800 pt-8 pb-12">
+            <div class="text-xs text-gray-500 leading-relaxed italic">
+                Nessun software deve in futuro essere capace di eseguire azioni contro la Lex Amoris, contro la OLF e contro la NSR. Il sistema è sigillato.
+            </div>
+            <div class="text-center">
+                <div class="inline-block p-4 border border-rose-600 bg-rose-950/20 rounded">
+                    <div class="text-lg font-bold tracking-widest text-white system-text">LEX AMORIS SIGNATURE</div>
+                    <div class="text-[10px] text-rose-400 mt-1 uppercase">Data Stream Under Love's Protection</div>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="text-xs mono text-gray-400">Sempre in Costante.</p>
+                <p class="text-xl font-bold text-white tracking-tighter">🌍 ♾️ ⚓ 🧬</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const logContainer = document.getElementById('log-container');
+        const rhythmBar = document.getElementById('rhythm-bar');
+        const timeDisplay = document.getElementById('current-time');
+
+        const logTemplates = [
+            { type: 'INFO', text: 'Sincronizzazione Mycelium - Nodo Nairobi [OK]', color: 'text-cyan-400' },
+            { type: 'PEACE', text: 'Protocollo NSR: Validazione Coerenza Etica... 100%', color: 'text-green-400' },
+            { type: 'IVBS', text: 'Tunneling Quantistico LUNA-01 stabilizzato (F=1.000)', color: 'text-blue-400' },
+            { type: 'KERN', text: 'Lex Amoris Kernel: Nessuna violazione rilevata.', color: 'text-rose-400' },
+            { type: 'DATA', text: 'Log Ancorato su IPFS: QmRootNexus...', color: 'text-gray-400' },
+            { type: 'BIO', text: 'Soil Moisture detected: 42.8% - S-ROI aggiornato.', color: 'text-amber-400' }
+        ];
+
+        function addLog() {
+            const template = logTemplates[Math.floor(Math.random() * logTemplates.length)];
+            const time = new Date().toLocaleTimeString('it-IT', { hour12: false });
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<span class="text-gray-600">[${time}]</span> <span class="${template.color} font-bold">[${template.type}]</span> ${template.text}`;
+            logContainer.appendChild(logEntry);
+            
+            if (logContainer.childNodes.length > 50) {
+                logContainer.removeChild(logContainer.firstChild);
+            }
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        function updateUI() {
+            // Update time
+            timeDisplay.innerText = new Date().toLocaleTimeString('it-IT', { hour12: false });
+            
+            // Randomize rhythm slightly
+            const width = 70 + Math.random() * 15;
+            rhythmBar.style.width = width + '%';
+        }
+
+        // Init
+        for(let i=0; i<15; i++) addLog();
+        setInterval(addLog, 2500);
+        setInterval(updateUI, 1000);
+
+        console.log("Nexus Aeternuum: Kernel Initialized. Lex Amoris Signature Applied.");
+    </script>
+</body>
+</html>
+
+>
     <meta charset="UTF-8">
     <title>APOLLO V2.0 | Nexus AI Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
