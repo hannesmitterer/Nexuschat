@@ -1,0 +1,20 @@
+# Ethics Policy Configuration
+---
+NSR: Non-Slavery Rule  # Core Axion
+OLF: One Love First    # Fundamental Priority
+
+rules:
+  - id: dignity
+    description: "Reject any input violating dignity score thresholds."
+    NSR_compliance: true
+    action: REJECT
+
+  - id: environmental-coherence
+    description: "Adjust system speed for environmental preservation based on CO2 ppm."
+    CO2_trigger: 450
+    action: THROTTLE
+
+  - id: Lex-Amoris-enforcement
+    description: "Ensure ethical resonance validation across all entities."
+    enforcement_mechanism: TEE
+    action: EXECUTE_UNMODIFIABLE
