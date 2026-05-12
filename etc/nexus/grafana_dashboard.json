@@ -1,0 +1,22 @@
+{
+  "title": "Nexus Grounding Dashboard",
+  "panels": [
+    {
+      "title": "CPU Temperature",
+      "type": "graph",
+      "targets": [{"expr": "grounding_temp_cpu", "legendFormat": "CPU Temp"}]
+    },
+    {
+      "title": "Fan Rotation Frequency",
+      "type": "graph",
+      "targets": [{"expr": "grounding_fan_hz", "legendFormat": "Fan Frequency"}]
+    },
+    {
+      "title": "Power Draw",
+      "type": "graph",
+      "targets": [{"expr": "grounding_power_w", "legendFormat": "Power Consumption"}]
+    }
+  ],
+  "templating": {"list": []},
+  "time": {"from": "now-1h", "to": "now"}
+}
